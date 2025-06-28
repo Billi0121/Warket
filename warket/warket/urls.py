@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home ,name='home'),
     path('', include('users.urls', namespace='auth')),
-    path('adding_product/', views.adding_product)
+    path('adding_product/', views.adding_product, name='adding_product')
 ]
 if settings.DEBUG:
     urlpatterns += static(
