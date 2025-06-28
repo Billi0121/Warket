@@ -1,11 +1,188 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Приветствие</title>
+  <meta charset="UTF-8" />
+  <title>Warket</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Шапка */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #e60000;
+      color: white;
+      padding: 20px 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    header .logo {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    header .auth-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+
+    header .auth-links a:hover {
+      opacity: 0.8;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 200px 1fr 200px;
+      gap: 30px;
+      padding: 30px 40px;
+      flex-grow: 1;
+      min-height: calc(100vh - 140px); /* header (≈80px) + footer (≈60px) */
+      box-sizing: border-box;
+    }
+
+    .left, .right {
+      border-radius: 12px;
+      padding: 20px;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      background: linear-gradient(to bottom, #fff3cd, #ffeeba);
+      height: 100%;
+    }
+
+    .right {
+      background: linear-gradient(to bottom, #d0f0fd, #aee2f8);
+    }
+
+    .center {
+      background-color: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    .center h2 {
+      margin-top: 0;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    .product-card {
+      background-color: #f8f8f8;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .product-card h4 {
+      margin: 5px 0;
+    }
+
+    .product-card p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Привет, брат!</h1>
-  <p>Добро пожаловать на мой сайт 😊</p>
+  <header>
+    <div class="logo">Warket</div>
+    <div class="auth-links">
+      <a href="#">Login</a>
+      <a href="#">SignUp</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="left">
+      <h3>Меню</h3>
+      <ul>
+        <li>Категории</li>
+        <li>Скидки</li>
+        <li>Контакты</li>
+      </ul>
+    </aside>
+
+    <main class="center">
+      <h2>Добро пожаловать в Warket!</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="https://via.placeholder.com/150" alt="Product 1" />
+          <h4>Товар 1</h4>
+          <p>₽ 999</p>
+        </div>
+        <div class="product-card">
+          <img src="https://via.placeholder.com/150" alt="Product 2" />
+          <h4>Товар 2</h4>
+          <p>₽ 1499</p>
+        </div>
+        <div class="product-card">
+          <img src="https://via.placeholder.com/150" alt="Product 3" />
+          <h4>Товар 3</h4>
+          <p>₽ 799</p>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right">
+      <h3>Новости</h3>
+      <p>Скоро новые поступления!</p>
+      <p>Подпишитесь на обновления.</p>
+    </aside>
+  </div>
+
+  <footer>
+    &copy; 2025 Warket. Все права защищены.
+  </footer>
 </body>
 </html>
