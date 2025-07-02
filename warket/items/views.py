@@ -4,7 +4,8 @@ from .models import *
 # Create your views here.
 
 def home(request):
-    return render(request, 'items/index.html')
+    items = Products.objects.all()
+    return render(request, 'items/index.html', {'items': items})
 
 
 def adding_product(request):
@@ -12,6 +13,8 @@ def adding_product(request):
         request.POST or None,
         request.FILES or None)
     if form.is_valid():
+        # form = Products.save(commit=False)
+        item = form.cleaned_data['item']
         form.save()
         return redirect('home')
     context = {
