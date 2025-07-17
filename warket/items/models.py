@@ -4,9 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 CURRENCY = [
-        ('$', '$'),
-        ('₽', '₽'),
-        ('€', '€'),
+        ('$', '$')
     ]
 
 MODEL = [
@@ -16,14 +14,17 @@ MODEL = [
 ]
 
 class Products(models.Model):
-    item = models.CharField(max_length=20)
+    item = models.CharField(validators=[
+        MinLengthValidator(10),
+        MaxLengthValidator(60)
+    ])
     description = models.TextField(blank=True, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='items')
-    price = models.IntegerField(
+    price = models.FloatField(
         validators=[
-            MinValueValidator(1, message='Some urgument'),
-            MaxValueValidator(1000000, message='Too much'),
-        ]
+            MinValueValidator(1.00, message='Some urgument'),
+            MaxValueValidator(100000.00, message='Too much'),
+        ],
     )
     currency = models.CharField(choices=CURRENCY)
     model = models.CharField(choices=MODEL)
