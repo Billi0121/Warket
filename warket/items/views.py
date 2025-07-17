@@ -25,3 +25,14 @@ def adding_product(request):
         'user': user
     }
     return render(request, 'items/adding_product.html', context)
+
+
+def product_detail(request, pk):
+    product = Products.objects.get(pk=pk)
+    context = {
+        'product': product
+    }
+    return render(request, 'items/product_detail.html', context)
+
+def cart(request):
+    return render(request, 'items/cart.html')
