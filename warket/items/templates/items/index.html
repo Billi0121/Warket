@@ -5,14 +5,15 @@
   <meta charset="UTF-8" />
   <title>Gooo</title>
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
   <header>
-    <div class="logo">Gooo</div>
+    <a href="{% url 'home' %}"><div class="logo">Gooo</div></a>
     <div class="auth-links">
       {% if user.is_authenticated %}
         <a href="{% url 'adding_product' %}" class="add-product-btn">+ Add Product</a>
-        <a href="#" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="{% url 'cart' %}" class="cart-link"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
         <a href="{% url 'users:logout' %}">Logout</a>
       {% else %}
         <a href="{% url 'users:login' %}">Login</a>
@@ -20,37 +21,38 @@
       {% endif %}
     </div>
   </header>
-
-  <div class="container">
-    <aside class="left">
-      <h3>Меню</h3>
-      <ul>
-        <li>Категории</li>
-        <li>Скидки</li>
-        <li>Контакты</li>
-      </ul>
-    </aside>
-    {% block content %}
-    <main class="center">
-      <h2>Добро пожаловать в Gooo!{{ user }}</h2>
-      <div class="product-grid">
-        {% for item in items %}
-          <a href="{% url 'product_detail' item.id %}"><div class="product-card">
-            {% if item.image %}
-              <div class="product-img">
-                <img src="{{ item.image.url }}" alt="{{ item.item }}">
+{% block cart %}
+    <div class="container">
+      <aside class="left">
+        <h3>Меню</h3>
+        <ul>
+          <li>Категории</li>
+          <li>Скидки</li>
+          <li>Контакты</li>
+        </ul>
+      </aside>
+      {% block content %}
+      <main class="center">
+        <h2>Добро пожаловать в Gooo!{{ user }}</h2>
+        <div class="product-grid">
+          {% for item in items %}
+            <a href="{% url 'product_detail' item.id %}"><div class="product-card">
+              {% if item.image %}
+                <div class="product-img">
+                  <img src="{{ item.image.url }}" alt="{{ item.item }}">
+                </div>
+              <a/>
+              {% endif %}
+              <div class="product-info">
+                <h4>{{ item.item }}</h4>
+                <p class="price">{{ item.price }} {{ item.currency }}</p>
               </div>
-            <a/>
-            {% endif %}
-            <div class="product-info">
-              <h4>{{ item.item }}</h4>
-              <p class="price">{{ item.price }} {{ item.currency }}</p>
             </div>
-          </div>
-        {% endfor %}
-      </div>
-      {% endblock %}
-    </main>
-  </div>
-</body>
-</html>
+          {% endfor %}
+        </div>
+        {% endblock %}
+      </main>
+    </div>
+  </body>
+  </html>
+{% endblock %}

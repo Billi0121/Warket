@@ -25,6 +25,10 @@
                 Владелец: {{ product.owner }}
             </div>
         </div>
+        <form method='post'>
+            {% csrf_token %}
+            <button>Add to cart
+        <form>
         
     </div>
 </div>

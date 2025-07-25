@@ -13,6 +13,7 @@ MODEL = [
     ('FOR PARTS', 'FOR PARTS'),
 ]
 
+
 class Products(models.Model):
     item = models.CharField(validators=[
         MinLengthValidator(10),
@@ -36,3 +37,10 @@ class Products(models.Model):
 
     def __str__(self):
         return f'{self.item} {self.price}'
+    
+class Cart(models.Model):
+    item = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True, related_name='items')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.item}'

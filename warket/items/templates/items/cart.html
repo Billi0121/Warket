@@ -1,1 +1,13 @@
-Nothing Yet!!!
+{% extends "items/index.html" %}
+{% block cart %}
+        {% for carts in cart %}
+            <a href="{% url 'product_detail' carts.item.id %}">
+            <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-2xl overflow-hidden flex items-center space-x-4 p-4 mb-4">
+                <img src="{{ carts.item.image.url }}" alt="Product Image" class="w-24 h-24 object-cover rounded-lg shadow-md">
+                <div class="flex flex-col justify-between h-full">
+                    <span class="text-lg font-semibold text-gray-800">{{ carts }}</span>
+                    <span class="text-sm text-gray-500 mt-2">{{ carts.item.price }} {{ carts.item.currency }}</span>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

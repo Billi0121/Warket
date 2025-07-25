@@ -6,3 +6,9 @@ class ProductsForm(forms.ModelForm):
     class Meta:
         model = Products
         fields = ['item', 'price', 'description', 'image']
+
+    
+class CartForm(forms.ModelForm):
+    class Meta:
+        model = Cart
+        fields = ['item', 'owner']
