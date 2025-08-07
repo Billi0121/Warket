@@ -12,12 +12,10 @@ services:
   web:
     build: .
     restart: always
-    depends_on:
-      - db
     ports:
       - "8000:8000"
+    depends_on:
+      - db
     env_file:
       - ./.env
-    volumes: 
-      - /var/lib/postgresql/data/
     
