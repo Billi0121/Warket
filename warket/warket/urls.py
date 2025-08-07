@@ -28,6 +28,11 @@ urlpatterns = [
     path('adding_product/', views.adding_product, name='adding_product'),
     path('product/<int:pk>/', views.product_detail, name='product_detail'),
     path('cart/', views.cart ,name='cart'),
+    path('cart/<int:pk>/', views.cart_delete , name='cart_delete'),
+    path('product_delete/<int:pk>/', views.product_delete, name='product_delete'),
+    path('product_edit/<int:pk>/', views.product_edit, name='product_edit'),
+    path('category/', views.category, name='category'),
+    path('category/<slug:slug>/', views.get_category, name='get_category'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

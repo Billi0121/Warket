@@ -5,10 +5,11 @@
     <div class="flex flex-col md:flex-row">
         
         <!-- Левая часть — изображение -->
-        <div class="md:w-1/2 h-96">
-            <img src="{{ product.image.url }}" alt="Product Image" class="w-full h-full object-cover">
-        </div>
-
+         {% if product.image %}
+            <div class="md:w-1/2 h-96">
+                <img src="{{ product.image.url }}" alt="Product Image" class="w-full h-full object-cover">
+            </div>
+        {% endif %}
         <!-- Правая часть — информация -->
         <div class="md:w-1/2 p-8 flex flex-col justify-center">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ product.item }}</h1>
@@ -25,6 +26,8 @@
                 Владелец: {{ product.owner }}
             </div>
         </div>
+        <a href="{% url 'product_delete' product.id %}">Delete</a>
+        <a href="{% url 'product_edit' product.id %}">Edit</a>
         <form method='post'>
             {% csrf_token %}
             <button>Add to cart

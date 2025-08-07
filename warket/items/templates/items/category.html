@@ -1,0 +1,7 @@
+{% extends 'items/index.html' %}
+
+{% block content %}
+    {% for categories in category %}
+        <a href="{% url 'get_category' categories %}">{{ categories }}</a>
+    {% endfor %}
+{% endblock %}

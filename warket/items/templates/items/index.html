@@ -24,9 +24,9 @@
 {% block cart %}
     <div class="container">
       <aside class="left">
-        <h3>Меню</h3>
+        <a href="{% url 'home' %}"><h3>Меню</h3>
         <ul>
-          <li>Категории</li>
+          <a href="{% url 'category' %}"><li>Категории</li></a>
           <li>Скидки</li>
           <li>Контакты</li>
         </ul>
@@ -35,7 +35,7 @@
       <main class="center">
         <h2>Добро пожаловать в Gooo!{{ user }}</h2>
         <div class="product-grid">
-          {% for item in items %}
+          {% for item in product %}
             <a href="{% url 'product_detail' item.id %}"><div class="product-card">
               {% if item.image %}
                 <div class="product-img">

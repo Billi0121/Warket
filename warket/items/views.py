@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 
 def authorizade_only(func):
@@ -12,8 +14,8 @@ def authorizade_only(func):
     return cheking_user()
 
 def home(request):
-    items = Products.objects.all()
-    return render(request, 'items/index.html', {'items': items})
+    product = Products.objects.all()
+    return render(request, 'items/index.html', {'product': product})
 
 
 def adding_product(request):
@@ -32,7 +34,6 @@ def adding_product(request):
         'user': user
     }
     return render(request, 'items/adding_product.html', context)
-
 
 def product_detail(request, pk):
     product = Products.objects.get(pk=pk)
@@ -57,3 +58,39 @@ def cart(request):
 
     }
     return render(request, 'items/cart.html', context)
+
+def cart_delete(request, pk):
+    cart = Cart.objects.get(pk=pk)
+    cart.delete()
+    return redirect('cart')
+
+def product_delete(request, pk):
+    product = Products.objects.get(pk=pk)
+    product.delete()
+    return redirect('home')
+
+def product_edit(request, pk):
+    product = Products.objects.get(pk=pk)
+    form = ProductsForm(
+        request.POST or None,
+        instance=product
+        )
+    if form.is_valid():
+        form.save()
+        return redirect('product_detail', product.id)
+    return render(request, 'items/adding_product.html', {'form': form})
+
+def category(request):
+    category = Category.objects.all()
+    context = {
+        'category': category,
+    }
+    return render(request, 'items/category.html', context)
+
+def get_category(request, slug):
+    category = Category.objects.get(slug=slug)
+    product = Products.objects.filter(Category=category)
+    context = {
+        'product': product,
+    }
+    return render(request, 'items/index.html', context)

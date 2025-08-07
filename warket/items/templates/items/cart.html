@@ -8,6 +8,7 @@
                     <span class="text-lg font-semibold text-gray-800">{{ carts }}</span>
                     <span class="text-sm text-gray-500 mt-2">{{ carts.item.price }} {{ carts.item.currency }}</span>
                 </div>
+                <a href="{% url 'cart_delete' carts.id %}">delete</a>
             </div>
         {% endfor %}
 {% endblock %}

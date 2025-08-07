@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-yjw4vf9&3h(^l9s8uz(pv@p#-xs(8y!o5_2#j*ni#8sk$j-@a3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
 
 
 # Application definition
@@ -76,10 +76,17 @@ WSGI_APPLICATION = 'warket.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.getenv("DB_NAME", default='django.db.backends.postgresql'),  
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("POSTGRES_USER"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),  # важно
+        'PORT': os.getenv("DB_PORT"),
+        
     }
 }
 
