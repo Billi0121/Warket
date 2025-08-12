@@ -63,11 +63,11 @@ RATE = [
     ('1', 1),
 ]
 
-class Rate(models.Model):
+class ProductRate(models.Model):
     rate = models.CharField(choices=(RATE), max_length=20)
     description = models.TextField(max_length=200, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    produtc = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user} {self.produtc}'
+        return f'{self.user} | {self.product} | Rating:{self.rate }'

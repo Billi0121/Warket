@@ -5,11 +5,12 @@
     <div class="flex flex-col md:flex-row">
         
         <!-- Левая часть — изображение -->
-         {% if product.image %}
+        {% if product.image %}
             <div class="md:w-1/2 h-96">
                 <img src="{{ product.image.url }}" alt="Product Image" class="w-full h-full object-cover">
             </div>
         {% endif %}
+        
         <!-- Правая часть — информация -->
         <div class="md:w-1/2 p-8 flex flex-col justify-center">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ product.item }}</h1>
@@ -22,17 +23,60 @@
                 {{ product.description }}
             </p>
 
-            <div class="text-sm text-gray-500">
-                Владелец: {{ product.owner }}
+            <div class="text-sm text-gray-500 mb-2">
+                Owner: <a href="{% url 'user_info' product.owner.id %}">{{ product.owner }}</a>
             </div>
+
+            <!-- Rate Product -->
+            <div class="rate-product bg-gray-100 p-4 rounded-lg shadow-inner mb-4">
+                {% comment %} {% if request.user.id == {{ product_rate_user }} %} {% endcomment %}
+                    {% comment %} You rated  {% endcomment %}
+                {% comment %} {% else %} {% endcomment %}
+                    <a href="{% url 'product_rate_view' product.id %}"><p class="text-gray-800 font-medium mb-2">Rate Product</p></a>
+                    <div class="flex space-x-2">
+                {% comment %} {% endif %}     {% endcomment %}
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex space-x-4 mb-4">
+                <a href="{% url 'product_edit' product.id %}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                    Edit
+                </a>
+                <a href="{% url 'product_delete' product.id %}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                    Delete
+                </a>
+            </div>
+
+            <!-- Add to Cart Form -->
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+                    Add to Cart
+                </button>
+            </form>
+
+            <div class="ratings mt-6 p-4 bg-gray-50 rounded-lg shadow-inner border border-gray-200 text-left">
+                 <h2 class="text-lg font-semibold text-gray-800 mb-3">Ratings</h2>
+                <div class="space-y-3">
+                    {% for product_rate in product_rate %}
+                        <div class="p-3 bg-white rounded shadow-sm border border-gray-100">
+                            <p class="text-sm text-gray-600">
+                                <span class="font-medium text-gray-800">{{ product_rate.user }}</span>
+                                <span class="text-yellow-500 ml-2">⭐ {{ product_rate.rate  }}</span>
+                            </p>
+                            <p class="text-gray-700 mt-1">
+                                {{ product_rate.description }}
+                            </p>
+                        </div>
+                    {% empty %}
+                        <p class="text-gray-500 text-sm">No ratings yet. Be the first to rate!</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+
         </div>
-        <a href="{% url 'product_delete' product.id %}">Delete</a>
-        <a href="{% url 'product_edit' product.id %}">Edit</a>
-        <form method='post'>
-            {% csrf_token %}
-            <button>Add to cart
-        <form>
-        
     </div>
 </div>
 {% endblock %}

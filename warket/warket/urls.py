@@ -33,6 +33,8 @@ urlpatterns = [
     path('product_edit/<int:pk>/', views.product_edit, name='product_edit'),
     path('category/', views.category, name='category'),
     path('category/<slug:slug>/', views.get_category, name='get_category'),
+    path('rate/<int:pk>/', views.product_rate_view, name='product_rate_view'),
+    path('<slug:username>/', views.user_info, name='user_info'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

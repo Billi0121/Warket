@@ -9,13 +9,14 @@ from django.shortcuts import get_object_or_404
 def authorizade_only(func):
     def cheking_user(request, *args ,**kwargs):
         if request.user.is_authenticated:
-            return func(request, *args, **kwargs)
-        return redirect ('users:login')
+            return redirect ('home')
+        return redirect('users:login')
     return cheking_user()
 
-def home(request):
+# @authorizade_only
+def home(requests):
     product = Products.objects.all()
-    return render(request, 'items/index.html', {'product': product})
+    return render(requests, 'items/index.html', {'product': product})
 
 
 def adding_product(request):
@@ -38,6 +39,9 @@ def adding_product(request):
 def product_detail(request, pk):
     product = Products.objects.get(pk=pk)
     form = CartForm(request.POST or None)
+    product_rate =  ProductRate.objects.filter(product=pk)
+    user = request.user
+    product_rate_user = ProductRate.objects.filter(user=user).filter(product=pk)
     if form.is_valid():
         Productss = form.save(commit=False)
         Productss.item = product
@@ -46,7 +50,9 @@ def product_detail(request, pk):
         return redirect('home')
     context = {
         'form': form,
-        'product': product
+        'product': product,
+        'product_rate': product_rate,
+        'product_rate_user': product_rate_user, 
     }
     return render(request, 'items/product_detail.html', context)
 
@@ -73,6 +79,7 @@ def product_edit(request, pk):
     product = Products.objects.get(pk=pk)
     form = ProductsForm(
         request.POST or None,
+        request.FILES or None,
         instance=product
         )
     if form.is_valid():
@@ -94,3 +101,27 @@ def get_category(request, slug):
         'product': product,
     }
     return render(request, 'items/index.html', context)
+
+def product_rate_view(request, pk):
+    product = get_object_or_404(Products, pk=pk)
+    form = ProductRateForm(request.POST or None)
+    if form.is_valid():
+        Rate = form.save(commit=False)
+        Rate.user = request.user
+        Rate.product = product
+        form.save()
+        return redirect('home')
+    context = {
+        'form': form,
+    }
+    return render(request, 'items/product_rate.html', context)
+
+
+def user_info(request, username):
+    user = User.objects.get(pk=username)
+    items = Products.objects.filter(owner=username)
+    context = {
+        'user': user,
+        'items': items
+    }
+    return render(request, 'items/user_information.html', context)
