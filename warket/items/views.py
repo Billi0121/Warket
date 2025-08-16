@@ -137,7 +137,7 @@ def user_info(request, username):
 
 from .serializers import *
 from rest_framework import viewsets
-
+from .models import *
 
 class ProductSerializerView(viewsets.ModelViewSet):
     queryset = Products.objects.all()
