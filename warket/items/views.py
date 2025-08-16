@@ -125,3 +125,21 @@ def user_info(request, username):
         'items': items
     }
     return render(request, 'items/user_information.html', context)
+
+
+
+
+
+""" API VIEW """
+
+
+
+
+from .serializers import *
+from rest_framework import viewsets
+
+
+class ProductSerializerView(viewsets.ModelViewSet):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer
+
