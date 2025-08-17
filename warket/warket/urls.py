@@ -24,7 +24,7 @@ from rest_framework.routers import DefaultRouter, SimpleRouter
 from items.views import ProductSerializerView
 
 routers = DefaultRouter()
-routers.register('products', ProductSerializerView)
+routers.register(r'products', ProductSerializerView, basename='psv')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

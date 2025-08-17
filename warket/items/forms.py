@@ -16,3 +16,7 @@ class ProductRateForm(forms.ModelForm):
     class Meta:
         model = ProductRate
         fields = ['rate', 'description',]
+
+class SearchForm(forms.Form):
+    search_field = forms.CharField()
+    fields = ('search_field',)

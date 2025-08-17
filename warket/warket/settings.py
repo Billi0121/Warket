@@ -124,6 +124,9 @@ CACHES = {
     }
 }
 
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 

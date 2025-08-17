@@ -16,7 +16,12 @@ def authorizade_only(func):
 # @authorizade_only
 def home(requests):
     product = Products.objects.all()
-    return render(requests, 'items/index.html', {'product': product})
+    form = SearchForm()
+    context = {
+        'product': product,
+        'form': form
+    }
+    return render(requests, 'items/index.html', context)
 
 
 def adding_product(request):
@@ -138,8 +143,17 @@ def user_info(request, username):
 from .serializers import *
 from rest_framework import viewsets
 from .models import *
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 class ProductSerializerView(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
 
+    @method_decorator(cache_page(60*1))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60*1))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
