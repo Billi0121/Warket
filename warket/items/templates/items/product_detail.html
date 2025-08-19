@@ -29,12 +29,8 @@
 
             <!-- Rate Product -->
             <div class="rate-product bg-gray-100 p-4 rounded-lg shadow-inner mb-4">
-                {% comment %} {% if request.user.id == {{ product_rate_user }} %} {% endcomment %}
-                    {% comment %} You rated  {% endcomment %}
-                {% comment %} {% else %} {% endcomment %}
                     <a href="{% url 'product_rate_view' product.id %}"><p class="text-gray-800 font-medium mb-2">Rate Product</p></a>
                     <div class="flex space-x-2">
-                {% comment %} {% endif %}     {% endcomment %}
                 </div>
             </div>
 

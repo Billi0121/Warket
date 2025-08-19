@@ -29,7 +29,7 @@ routers.register(r'products', ProductSerializerView, basename='psv')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home ,name='home'),
-    path('api/', include(routers.urls)),
+    # path('api/', include(routers.urls)),
     path('', include('users.urls', namespace='auth')),
     path('adding_product/', views.adding_product, name='adding_product'),
     path('product/<int:pk>/', views.product_detail, name='product_detail'),

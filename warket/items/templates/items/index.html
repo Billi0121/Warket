@@ -3,13 +3,21 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gooo</title>
+
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <!-- Font Awesome (для иконки корзины) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+  <!-- Tailwind по CDN (если нужен) -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
   <header>
-    <a href="{% url 'home' %}"><div class="logo">Gooo</div></a>
+    <a class="logo" href="{% url 'home' %}">Gooo</a>
     <div class="auth-links">
       {% if user.is_authenticated %}
         <a href="{% url 'adding_product' %}" class="add-product-btn">+ Add Product</a>
@@ -21,37 +29,38 @@
       {% endif %}
     </div>
   </header>
-{% block cart %}
-    <div class="container">
-      <aside class="left">
-        <a href="{% url 'home' %}"><h3>Меню</h3>
-        <ul>
-          <a href="{% url 'category' %}"><li>Категории</li></a>
-        </ul>
-      </aside>
-      {% block content %}
+
+  <div class="container">
+    <aside class="left">
+      <h3><a href="{% url 'home' %}">Меню</a></h3>
+      <ul>
+        <li><a href="{% url 'category' %}">Категории</a></li>
+      </ul>
+    </aside>
+
+    <main class="center">
       {{ form }}
-      <main class="center">
-        <h2>Добро пожаловать в Gooo!{{ user }}</h2>
-        <div class="product-grid">
-          {% for item in product %}
-            <a href="{% url 'product_detail' item.id %}"><div class="product-card">
-              {% if item.image %}
-                <div class="product-img">
-                  <img src="{{ item.image.url }}" alt="{{ item.item }}">
-                </div>
-              <a/>
-              {% endif %}
-              <div class="product-info">
-                <h4>{{ item.item }}</h4>
-                <p class="price">{{ item.price }} {{ item.currency }}</p>
+      {% comment %} {{ text }} {% endcomment %}
+      <h2>Добро пожаловать в Gooo! {{ user }}</h2>
+
+      <div class="product-grid">
+        {% for item in products %}
+          <a class="product-card" href="{% url 'product_detail' item.id %}">
+            {% if item.image %}
+              <div class="product-img">
+                <img src="{{ item.image.url }}" alt="{{ item.item }}">
               </div>
+            {% endif %}
+            <div class="product-info">
+              <h4>{{ item.item }}</h4>
+              <p class="price">{{ item.price }} {{ item.currency }}</p>
             </div>
-          {% endfor %}
-        </div>
-        {% endblock %}
-      </main>
-    </div>
-  </body>
-  </html>
-{% endblock %}
+          </a>
+        {% empty %}
+          <p>Товары не найдены.</p>
+        {% endfor %}
+      </div>
+    </main>
+  </div>
+</body>
+</html>

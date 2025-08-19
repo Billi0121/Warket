@@ -15,11 +15,14 @@ def authorizade_only(func):
 
 # @authorizade_only
 def home(requests):
-    product = Products.objects.all()
-    form = SearchForm()
+    products = Products.objects.all()
+    # form = SearchForm()
+    # if form.is_valid():
+        # form.save()
     context = {
-        'product': product,
-        'form': form
+        'products': products,
+        # 'form': forms
+        # 'text': text
     }
     return render(requests, 'items/index.html', context)
 
