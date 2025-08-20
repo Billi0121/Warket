@@ -39,8 +39,9 @@
     </aside>
 
     <main class="center">
-      {{ form }}
+      {% comment %} {{ form }} {% endcomment %}
       {% comment %} {{ text }} {% endcomment %}
+    {% block content %}
       <h2>Добро пожаловать в Gooo! {{ user }}</h2>
 
       <div class="product-grid">
@@ -60,6 +61,7 @@
           <p>Товары не найдены.</p>
         {% endfor %}
       </div>
+    {% endblock %}
     </main>
   </div>
 </body>
