@@ -32,7 +32,7 @@
 
   <div class="container">
     <aside class="left">
-      <h3><a href="{% url 'home' %}">Меню</a></h3>
+      <h3><a href="{% url 'home' %}">Меню {{ prac }}</a></h3>
       <ul>
         <li><a href="{% url 'category' %}">Категории</a></li>
       </ul>
@@ -64,5 +64,8 @@
     {% endblock %}
     </main>
   </div>
+  <a href="https://t.me/Avakdaw_bot" target="_blank" class="telegram-icon">
+    <i class="fab fa-telegram-plane"></i>
+  </a>
 </body>
 </html>

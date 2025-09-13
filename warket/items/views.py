@@ -36,7 +36,7 @@ def adding_product(request):
         Products.owner = request.user
         Products.currency = '$'
         form.save()
-        # return redirect('home')
+        return redirect('home')
     context = {
         'form': form,
         'user': user
@@ -48,7 +48,7 @@ def product_detail(request, pk):
     form = CartForm(request.POST or None)
     product_rate =  ProductRate.objects.filter(product=pk)
     user = request.user
-    # product_rate_user = ProductRate.objects.filter(user=user).filter(product=pk)
+    product_rate_user = ProductRate.objects.filter(user=user).filter(product=pk)
     if form.is_valid():
         Productss = form.save(commit=False)
         Productss.item = product
@@ -59,7 +59,7 @@ def product_detail(request, pk):
         'form': form,
         'product': product,
         'product_rate': product_rate,
-        # 'product_rate_user': product_rate_user, 
+        'product_rate_user': product_rate_user, 
     }
     return render(request, "items/product_detail.html", context )
 
