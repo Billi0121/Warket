@@ -48,6 +48,13 @@ class Category(models.Model):
     def __str__(self):
         return self.slug
 
+class Categorylist(models.Model):
+    slug = models.SlugField(unique=True)
+    category_slug = models.ForeignKey("Category",on_delete=models.CASCADE,blank=False, null=False)
+
+    def __str__(self):
+        return self.slug
+
 class Cart(models.Model):
     item = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True, related_name='items')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -71,3 +78,4 @@ class ProductRate(models.Model):
 
     def __str__(self):
         return f'{self.user} | {self.product} | Rating:{self.rate }'
+    

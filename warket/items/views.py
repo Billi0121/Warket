@@ -103,9 +103,11 @@ def category(request):
 
 def get_category(request, slug):
     category = Category.objects.get(slug=slug)
-    product = Products.objects.filter(Category=category)
+    category_list = Categorylist.objects.get(category_list=category)
+    # product = Products.objects.filter(Category=category)
     context = {
-        'product': product,
+        # 'product': product,
+        'category_list': category_list
     }
     return render(request, 'items/index.html', context)
 
@@ -152,10 +154,10 @@ class ProductSerializerView(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
 
-    @method_decorator(cache_page(60*1))
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+class CategoryView(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
-    @method_decorator(cache_page(60*1))
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+class Group_type_groupView(viewsets.ModelViewSet):
+    queryset = Categorylist.objects.all()
+    serializer_class = Group_type_groupSerializer

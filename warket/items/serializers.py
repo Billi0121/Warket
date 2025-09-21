@@ -5,4 +5,13 @@ class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
         fields = ('item', 'price') 
-        # ('item','description','owner', 'price', 'Category', 'currency', 'model', 'image')
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('slug',)
+
+class Group_type_groupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categorylist
+        fields = ('slug', 'category_slug')

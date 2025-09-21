@@ -1,10 +1,15 @@
 {% extends 'items/index.html' %}
 
 {% block content %}
-    {% for categories in category %}
+    {% comment %} {% for categories in category %}
         <a href="{% url 'get_category' categories %}">{{ categories }}</a>
 
     {% empty %}
         Ther is No categories yet!!!
+    {% endfor %} {% endcomment %}
+    {% for categorieslist in categories_list%}
+        {{ categorieslist }}
+    {% empty %}
+        Ther is no categories_list
     {% endfor %}
 {% endblock %}
