@@ -50,16 +50,16 @@ class Category(models.Model):
 
 class Categorylist(models.Model):
     slug = models.SlugField(unique=True)
-    category_slug = models.ForeignKey("Category",on_delete=models.CASCADE,blank=False, null=False)
+    category_slug = models.ForeignKey("Category",on_delete=models.CASCADE,blank=False, null=False, related_name="category_slug")
 
     def __str__(self):
-        return self.slug
+        return f'{self.slug}'
 
 class Cart(models.Model):
     item = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True, related_name='items')
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
+    def __str__(self): 
         return f'{self.item}'
     
 RATE = [

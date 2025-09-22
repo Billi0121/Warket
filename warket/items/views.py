@@ -103,11 +103,16 @@ def category(request):
 
 def get_category(request, slug):
     category = Category.objects.get(slug=slug)
-    category_list = Categorylist.objects.get(category_list=category)
-    # product = Products.objects.filter(Category=category)
+    step2_category = category.category_slug.all()
     context = {
-        # 'product': product,
-        'category_list': category_list
+        "category": step2_category
+    }
+    return render(request, 'items/category2.html', context)
+
+def category2(request, slug ,slug2):
+    
+    context = {
+
     }
     return render(request, 'items/index.html', context)
 
