@@ -5,7 +5,7 @@ from .models import *
 class ProductsForm(forms.ModelForm):
     class Meta:
         model = Products
-        fields = ['item', 'price', 'description', 'image', 'Category']
+        fields = ['item', 'price', 'description', 'image', 'Category', "Category2"]
 
 class CartForm(forms.ModelForm):
     class Meta:
@@ -17,6 +17,16 @@ class ProductRateForm(forms.ModelForm):
         model = ProductRate
         fields = ['rate', 'description',]
 
-class SearchForm(forms.Form):
-    search_field = forms.CharField()
-    fields = ('search_field',)
+# class SearchForm(forms.Form):
+#     search_field = forms.CharField()
+#     fields = ('search_field',)
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('slug',)
+
+class Category2Form(forms.ModelForm):
+    class Meta:
+        model = Categorylist
+        fields = ('slug', )

@@ -1,0 +1,14 @@
+{% extends 'items/index.html' %}
+
+{% block content %}
+    {% for products in product %}
+        {% if products.image %}
+            <img src="{{ products.image.url }}">
+        {% endif %}
+        {{ products }}
+        {{ hello }}
+        <br>
+        <br>
+        <br>
+    {% endfor %}
+{% endblock %}

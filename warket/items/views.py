@@ -3,6 +3,7 @@ from .forms import *
 from .models import *
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from .filters import *
 
 # Create your views here.
 
@@ -18,8 +19,10 @@ def home(requests):
     # form = SearchForm()
     # if form.is_valid():
         # form.save()
+    search = ProductsFilter()
     context = {
         'products': products,
+        'search': search
         # 'form': forms
         # 'text': text
     }
@@ -35,11 +38,20 @@ def adding_product(request):
         Products = form.save(commit=False)
         Products.owner = request.user
         Products.currency = '$'
+        category = form.cleaned_data['Category']
+        print(category)
         form.save()
         return redirect('home')
+    # form = CategoryForm(request.POST or None,)
+    # category = Category.objects.all()
+    # if form.is_valid():
+        # form.save()
     context = {
+        # 'form': form,
+        # 'category': category
         'form': form,
-        'user': user
+        'user': user,
+        # 'category': category
     }
     return render(request, 'items/adding_product.html', context)
 
@@ -110,11 +122,14 @@ def get_category(request, slug):
     return render(request, 'items/category2.html', context)
 
 def category2(request, slug ,slug2):
-    
+    categ = Category.objects.get(slug=slug)
+    categ2= Categorylist.objects.get(slug=slug2)
+    product = Products.objects.filter(Category=categ).filter(Category2=categ2)
     context = {
-
+        "hello": "hello",
+        "product": product
     }
-    return render(request, 'items/index.html', context)
+    return render(request, 'items/categories_product.html', context)
 
 def product_rate_view(request, pk):
     product = get_object_or_404(Products, pk=pk)

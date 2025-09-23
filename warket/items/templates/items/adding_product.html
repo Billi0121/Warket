@@ -1,5 +1,9 @@
 <form method=POST enctype="multipart/form-data">
-    {{ form.as_p }}
+    {{ form.Category }}
+    {% if form.is_valid %}
+        {{ form.item }}
+    {% endif %}
     {% csrf_token %}
+    {% comment %} {{ category }} {% endcomment %}
     <button>Add
 <form>

@@ -15,7 +15,7 @@ MODEL = [
 
 
 class Products(models.Model):
-    item = models.CharField(max_length=20)
+    item = models.CharField(max_length=20, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='items')
     price = models.FloatField(
@@ -23,6 +23,7 @@ class Products(models.Model):
             MinValueValidator(1.00, message='Some urgument'),
             MaxValueValidator(100000.00, message='Too much'),
         ],
+        blank=True, null=True
     )
     Category = models.ForeignKey(
         "Category",
@@ -30,6 +31,7 @@ class Products(models.Model):
         blank=True,
         null=True
     )
+    Category2 = models.ForeignKey("Categorylist", on_delete=models.CASCADE, blank=True, null=True)
     currency = models.CharField(choices=CURRENCY, max_length=20)
     model = models.CharField(choices=MODEL, max_length=10)
     image = models.ImageField(
@@ -41,9 +43,15 @@ class Products(models.Model):
     def __str__(self):
         return f'{self.item} {self.price}'
 
+class CategoryChar(models.Model):
+    name = models.ForeignKey("Category", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Category(models.Model):
     slug = models.SlugField(unique=True)
+
 
     def __str__(self):
         return self.slug

@@ -37,14 +37,14 @@
         <li><a href="{% url 'category' %}">Категории</a></li>
       </ul>
     </aside>
-
     <main class="center">
-      {% comment %} {{ form }} {% endcomment %}
-      {% comment %} {{ text }} {% endcomment %}
     {% block content %}
       <h2>Добро пожаловать в Gooo! {{ user }}</h2>
-
-      <div class="product-grid">
+      {% comment %} <form method=post>
+        {{ search.form }}
+        <button>add
+      </form> {% endcomment %}
+        <div class="product-grid">
         {% for item in products %}
           <a class="product-card" href="{% url 'product_detail' item.id %}">
             {% if item.image %}
