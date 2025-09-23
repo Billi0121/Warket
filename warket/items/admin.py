@@ -5,7 +5,7 @@ from .models import *
 
 admin.site.register(Products)
 admin.site.register(Cart)
-admin.site.register(Category)
 admin.site.register(ProductRate)
+admin.site.register(Category)
 admin.site.register(Categorylist)
-admin.site.register(CategoryChar)
+admin.site.register(Categorylist2)

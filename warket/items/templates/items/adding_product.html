@@ -1,5 +1,5 @@
 <form method=POST enctype="multipart/form-data">
-    {{ form.Category }}
+    {{ form.as_p }}
     {% if form.is_valid %}
         {{ form.item }}
     {% endif %}
