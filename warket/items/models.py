@@ -26,16 +26,16 @@ class Products(models.Model):
     )
     Category = models.ForeignKey(
         "Category", on_delete=models.SET_NULL, blank=True, null=True
-    )
+    )#Forget lo lowercase it 
     Category2 = models.ForeignKey(
         "Categorylist", on_delete=models.CASCADE, blank=True, null=True
-    )
+    )#Forget lo lowercase it 
     currency = models.CharField(choices=CURRENCY, max_length=20)
     model = models.CharField(choices=MODEL, max_length=10)
     image = models.ImageField("Image", upload_to="warket", blank=True)
 
     def __str__(self):
-        return f"{self.item} {self.price}"
+        return f"{self.price}"
 
 
 class Category(models.Model):
@@ -73,10 +73,10 @@ class Cart(models.Model):
     item = models.ForeignKey(
         Products, on_delete=models.CASCADE, blank=True, null=True, related_name="items"
     )
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="owner")
 
     def __str__(self):
-        return f"{self.item}"
+        return f"{self.owner} {self.item}"
 
 
 RATE = [

@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for categories in category %}
-        <a href="{% url 'category2' categories.category_slug categories %}">{{ categories }}</a>
+        <a href="{% url 'category2' categories.category_slug categories %}">{{ categories }}</a>  |  
         {% comment %} {{ categories }} {% endcomment %}
     {% empty %}
         Ther is No categories yet!!!

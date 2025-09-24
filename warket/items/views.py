@@ -8,26 +8,12 @@ from .models import Products, Category, Categorylist, Categorylist2, Cart, Produ
 # Create your views here.
 
 
-def authorizade_only(func):
-    def cheking_user(request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect("home")
-        return redirect("users:login")
-
-    return cheking_user()
-
-
 def home(requests):
     products = Products.objects.all()
-    # form = SearchForm()
-    # if form.is_valid():
-    # form.save()
     search = ProductsFilter()
     context = {
         "products": products,
         "search": search,
-        # 'form': forms
-        # 'text': text
     }
     return render(requests, "items/index.html", context)
 
@@ -43,18 +29,12 @@ def adding_product(request):
         print(category)
         form.save()
         return redirect("home")
-    # form = CategoryForm(request.POST or None,)
-    # category = Category.objects.all()
-    # if form.is_valid():
-    # form.save()
     context = {
-        # 'form': form,
-        # 'category': category
         "form": form,
         "user": user,
-        # 'category': category
     }
     return render(request, "items/adding_product.html", context)
+
 
 
 def product_detail(request, pk):
@@ -96,7 +76,6 @@ def cart_delete(request, pk):
 def product_delete(request, pk):
     product = Products.objects.get(pk=pk)
     product.delete()
-    # return redirect('home')
 
 
 def product_edit(request, pk):
@@ -139,7 +118,6 @@ def product_rate_view(request, pk):
         Rate.user = request.user
         Rate.product = product
         form.save()
-        # return redirect('home')
     context = {
         "form": form,
     }
