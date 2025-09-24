@@ -7,13 +7,11 @@ A modern e-commerce platform built with Django and Tailwind CSS
 
 
 ## 📑 Table of Contents
-- [About](#about)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
+- [🚀 WARKET](#-warket)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [About](#about)
+  - [Features](#features)
+  - [Installation](#installation)
 
 ## About
 WARKET is a fully-featured e-commerce platform where users can browse products, add to cart, and complete secure purchases. 
