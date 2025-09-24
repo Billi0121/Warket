@@ -1,12 +1,6 @@
 
 services:
-  db:
-    restart: always
-    image: postgres:16.9-alpine
-    env_file:
-      - ./.env
-    volumes:
-      - /var/lib/postgresql/data/
+
   web:
     build: .
     restart: always

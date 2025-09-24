@@ -1,8 +1,0 @@
-name: Warket-Github-action
-
-on: [push]
-
-jobs:
-  push_to_docker:
-    runs-on: ubuntu:latest
-    steps:
