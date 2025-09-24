@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gooo</title>
+  <title>WARKET</title>
 
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
   <!-- Font Awesome (для иконки корзины) -->
@@ -17,7 +17,7 @@
 </head>
 <body>
   <header>
-    <a class="logo" href="{% url 'home' %}">Gooo</a>
+    <a class="logo" href="{% url 'home' %}">WARKET</a>
     <div class="auth-links">
       {% if user.is_authenticated %}
         <a href="{% url 'adding_product' %}" class="add-product-btn">+ Add Product</a>
@@ -39,7 +39,7 @@
     </aside>
     <main class="center">
     {% block content %}
-      <h2>Добро пожаловать в Gooo! {{ user }}</h2>
+      <h2>Добро пожаловать в WARKET! {{ user }}</h2>
       {% comment %} <form method=post>
         {{ search.form }}
         <button>add

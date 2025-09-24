@@ -6,9 +6,10 @@
             <img src="{{ products.image.url }}">
         {% endif %}
         {{ products }}
-        {{ hello }}
         <br>
         <br>
         <br>
+    {% empty %}
+     Пока нет товаров на этой категории
     {% endfor %}
 {% endblock %}
