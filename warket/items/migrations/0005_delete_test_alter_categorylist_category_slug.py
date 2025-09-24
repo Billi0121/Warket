@@ -7,16 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('items', '0004_test'),
+        ("items", "0004_test"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Test',
+            name="Test",
         ),
         migrations.AlterField(
-            model_name='categorylist',
-            name='category_slug',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category_slug', to='items.category'),
+            model_name="categorylist",
+            name="category_slug",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="category_slug",
+                to="items.category",
+            ),
         ),
     ]

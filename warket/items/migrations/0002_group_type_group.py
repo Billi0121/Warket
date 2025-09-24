@@ -7,16 +7,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('items', '0001_initial'),
+        ("items", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Group_type_group',
+            name="Group_type_group",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('slug', models.SlugField(unique=True)),
-                ('category_slug', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='items.category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("slug", models.SlugField(unique=True)),
+                (
+                    "category_slug",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="items.category"
+                    ),
+                ),
             ],
         ),
     ]

@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('items', '0005_delete_test_alter_categorylist_category_slug'),
+        ("items", "0005_delete_test_alter_categorylist_category_slug"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='products',
-            name='Category',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='items.categorylist'),
+            model_name="products",
+            name="Category",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="items.categorylist",
+            ),
         ),
     ]

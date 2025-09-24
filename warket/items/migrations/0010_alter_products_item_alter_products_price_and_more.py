@@ -8,29 +8,55 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('items', '0009_categorychar'),
+        ("items", "0009_categorychar"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='products',
-            name='item',
+            model_name="products",
+            name="item",
             field=models.CharField(blank=True, max_length=20, null=True),
         ),
         migrations.AlterField(
-            model_name='products',
-            name='price',
-            field=models.FloatField(blank=True, null=True, validators=[django.core.validators.MinValueValidator(1.0, message='Some urgument'), django.core.validators.MaxValueValidator(100000.0, message='Too much')]),
+            model_name="products",
+            name="price",
+            field=models.FloatField(
+                blank=True,
+                null=True,
+                validators=[
+                    django.core.validators.MinValueValidator(
+                        1.0, message="Some urgument"
+                    ),
+                    django.core.validators.MaxValueValidator(
+                        100000.0, message="Too much"
+                    ),
+                ],
+            ),
         ),
         migrations.CreateModel(
-            name='Categorylist2',
+            name="Categorylist2",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('slug', models.SlugField(unique=True)),
-                ('category_list', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category_list', to='items.categorylist')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("slug", models.SlugField(unique=True)),
+                (
+                    "category_list",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="category_list",
+                        to="items.categorylist",
+                    ),
+                ),
             ],
         ),
         migrations.DeleteModel(
-            name='CategoryChar',
+            name="CategoryChar",
         ),
     ]
